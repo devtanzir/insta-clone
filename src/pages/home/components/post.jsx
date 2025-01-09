@@ -52,7 +52,7 @@ const Post = () => {
                 </button>
               </div>
               <div
-                className="relative"
+                className={showHeart[post.id] ? "relative" : ""}
                 onDoubleClick={() => handleLike(post.id)}
               >
                 <img
