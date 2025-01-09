@@ -37,3 +37,15 @@ export const updatePost = createAsyncThunk("post/updatePost", async (data) => {
     throw new Error(error.message || "something went wrong");
   }
 });
+
+export const likeIncrement = createAsyncThunk(
+  "post/likeIncrement",
+  async (data) => {
+    try {
+      const res = await API.put(`/post/${data.id}`, data);
+      return res.data;
+    } catch (error) {
+      throw new Error(error.message || "something went wrong");
+    }
+  }
+);

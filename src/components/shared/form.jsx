@@ -94,7 +94,7 @@ const Form = ({ handleToggle }) => {
           postImage: postImageUrl,
           createdAt: Date.now(),
           updatedAt: null,
-          like: false,
+          like: 0,
         })
       );
 

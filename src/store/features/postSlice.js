@@ -3,6 +3,7 @@ import {
   createPost,
   deletePost,
   getAllPosts,
+  likeIncrement,
   updatePost,
 } from "./postApiSlice";
 
@@ -77,6 +78,17 @@ const postSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || "Failed to create post";
         state.success = false;
+      })
+      .addCase(likeIncrement.fulfilled, (state, action) => {
+        const postIndex = state.post.findIndex(
+          (post) => post.id === action.payload.id
+        );
+        if (postIndex > -1) {
+          state.post[postIndex] = action.payload;
+        }
+        state.success = true;
+        state.error = null;
+        state.loading = false;
       });
   },
 });

@@ -3,12 +3,16 @@ import { useDispatch } from "react-redux";
 import useToggler from "../../../hooks/useToggler";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { deletePost } from "../../../store/features/postApiSlice";
+import {
+  deletePost,
+  likeIncrement,
+} from "../../../store/features/postApiSlice";
 
 const usePost = () => {
   const dispatch = useDispatch();
   const { post: posts } = useSelector((state) => state.post);
   const { handleToggle, open } = useToggler();
+  const [showHeart, setShowHeart] = useState({});
   const { handleToggle: handleToggleEdit, open: openEdit } = useToggler();
   const [postId, setPostId] = useState();
   const handleDeleteButton = (id) => {
@@ -38,6 +42,22 @@ const usePost = () => {
     handleToggleEdit();
     handleToggle();
   };
+  const handleLike = (id) => {
+    const updatedPosts = posts.map((post) => {
+      if (post.id === id) {
+        return { ...post, like: post.like + 1 }; // Create a new object with updated likes
+      }
+      return post; // Return the post as is if it doesn't match
+    });
+
+    const newPost = updatedPosts.find((post) => post.id === id);
+    dispatch(likeIncrement(newPost));
+    setShowHeart((prev) => ({ ...prev, [id]: true }));
+    setTimeout(() => {
+      setShowHeart((prev) => ({ ...prev, [id]: false }));
+    }, 1000);
+  };
+
   return {
     posts,
     open,
@@ -47,7 +67,9 @@ const usePost = () => {
     handleEdit,
     handleToggle,
     handleToggleEdit,
+    handleLike,
     postId,
+    showHeart,
   };
 };
 
