@@ -1,0 +1,22 @@
+{
+  "post": [
+    {
+      "id": "c1aa",
+      "authorName": "Robiul Ibne Ali",
+      "postDetails": "This is the first post that i edit",
+      "avatar": "https://res.cloudinary.com/dh0znqxdt/image/upload/v1736398113/frtsuo9bhajkyem8gc1h.jpg",
+      "postImage": "https://res.cloudinary.com/dh0znqxdt/image/upload/v1736398114/vkul44snkwqxxnokiomr.png",
+      "createdAt": 1736368503482,
+      "updatedAt": 1736398091564
+    },
+    {
+      "id": "bd25",
+      "authorName": "Aminul",
+      "postDetails": "hi there i am a frontend developer\n",
+      "avatar": "https://res.cloudinary.com/dh0znqxdt/image/upload/v1736398113/frtsuo9bhajkyem8gc1h.jpg",
+      "postImage": "https://res.cloudinary.com/dh0znqxdt/image/upload/v1736398114/vkul44snkwqxxnokiomr.png",
+      "createdAt": 1736368503482,
+      "updatedAt": 1736398125216
+    }
+  ]
+}
