@@ -4,15 +4,15 @@ import Logo from "../../assets/icons/logo";
 import Post from "./components/post";
 import RightSidebar from "./components/right-sidebar";
 import MobileNav from "./components/mobile-nav";
-import { useState } from "react";
+import useToggler from "../../hooks/useToggler";
 
 const InstagramClone = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { handleToggle, open } = useToggler();
   return (
     <>
       <div className="flex h-screen bg-black text-white">
         {/* Mobile Sidebar */}
-        <MobileNav open={sidebarOpen} setOpen={setSidebarOpen} />
+        <MobileNav open={open} setOpen={handleToggle} />
         {/* Desktop Sidebar */}
         <div className="hidden h-full lg:flex flex-col w-64 border-r border-gray-800 p-4 fixed">
           <Logo className="mb-8" />
@@ -24,7 +24,7 @@ const InstagramClone = () => {
           <div className="lg:w-[630px]">
             {/* Mobile Header */}
             <div className="lg:hidden flex justify-between items-center p-4 border-b border-gray-800">
-              <button onClick={() => setSidebarOpen(true)}>
+              <button onClick={handleToggle}>
                 <Menu className="size-6" />
               </button>
               <Logo />

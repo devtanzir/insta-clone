@@ -1,22 +1,24 @@
 {
   "post": [
     {
-      "id": "c1aa",
-      "authorName": "Robiul Ibne Ali",
-      "postDetails": "This is the first post that i edit",
-      "avatar": "https://res.cloudinary.com/dh0znqxdt/image/upload/v1736398113/frtsuo9bhajkyem8gc1h.jpg",
-      "postImage": "https://res.cloudinary.com/dh0znqxdt/image/upload/v1736398114/vkul44snkwqxxnokiomr.png",
-      "createdAt": 1736368503482,
-      "updatedAt": 1736398091564
+      "id": "45b4",
+      "authorName": "asdfasd",
+      "postDetails": "sdafadsfasd",
+      "avatar": "https://res.cloudinary.com/dh0znqxdt/image/upload/v1736422087/td0sxnfqd1qes5kqazu6.png",
+      "postImage": "https://res.cloudinary.com/dh0znqxdt/image/upload/v1736422088/yhrviiuxcr077gm1vlnz.jpg",
+      "createdAt": 1736422064187,
+      "updatedAt": null,
+      "like": false
     },
     {
-      "id": "bd25",
-      "authorName": "Aminul",
-      "postDetails": "hi there i am a frontend developer\n",
-      "avatar": "https://res.cloudinary.com/dh0znqxdt/image/upload/v1736398113/frtsuo9bhajkyem8gc1h.jpg",
-      "postImage": "https://res.cloudinary.com/dh0znqxdt/image/upload/v1736398114/vkul44snkwqxxnokiomr.png",
-      "createdAt": 1736368503482,
-      "updatedAt": 1736398125216
+      "id": "ffe8",
+      "authorName": "What the fuck",
+      "postDetails": "sadfasdf",
+      "avatar": "https://res.cloudinary.com/dh0znqxdt/image/upload/v1736422440/dahrisbbysn6bvhonq3h.jpg",
+      "postImage": "https://res.cloudinary.com/dh0znqxdt/image/upload/v1736422404/bozjnlesrtqiupxwgutb.png",
+      "createdAt": 1736422380599,
+      "updatedAt": 1736422416463,
+      "like": false
     }
   ]
 }

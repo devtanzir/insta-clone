@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import "./App.css";
-import InstagramDark from "./pages/home";
+import Instagram from "./pages/home";
 import { useDispatch } from "react-redux";
 import { getAllPosts } from "./store/features/postApiSlice";
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -10,7 +11,7 @@ function App() {
   }, [dispatch]);
   return (
     <>
-      <InstagramDark />
+      <Instagram />
     </>
   );
 }

@@ -1,18 +1,17 @@
 import { useState } from "react";
 import Input from "../ui/input";
 import Label from "../ui/label";
-import FileUpload from "../ui/file";
+// import FileUpload from "../ui/file";
 import { cloudImageUpload } from "../../utils/utils";
 import { useDispatch } from "react-redux";
-import { createPost, updatePost } from "../../store/features/postApiSlice";
+import { createPost } from "../../store/features/postApiSlice";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { activeLoading } from "../../store/features/postSlice";
 import { Loader } from "lucide-react";
-import { useEffect } from "react";
 
-const Form = ({ handleToggle, formValue }) => {
+const Form = ({ handleToggle }) => {
   const initialState = {
     authorName: "",
     postDetails: "",
@@ -55,8 +54,8 @@ const Form = ({ handleToggle, formValue }) => {
     dispatch(activeLoading());
 
     // Initialize URLs with existing values
-    let avatarUrl = formValue?.avatar || null;
-    let postImageUrl = formValue?.postImage || null;
+    let avatarUrl = null;
+    let postImageUrl = null;
 
     try {
       // Handle avatar upload
@@ -88,35 +87,22 @@ const Form = ({ handleToggle, formValue }) => {
         });
         return;
       }
-
-      // Dispatch update or create post action
-      if (formValue) {
-        dispatch(
-          updatePost({
-            id: formValue.id,
-            ...formData,
-            avatar: avatarUrl,
-            postImage: postImageUrl,
-            createdAt: formValue.createdAt,
-            updatedAt: Date.now(),
-          })
-        );
-      } else {
-        dispatch(
-          createPost({
-            ...formData,
-            avatar: avatarUrl,
-            postImage: postImageUrl,
-            createdAt: Date.now(),
-          })
-        );
-      }
+      dispatch(
+        createPost({
+          ...formData,
+          avatar: avatarUrl,
+          postImage: postImageUrl,
+          createdAt: Date.now(),
+          updatedAt: null,
+          like: false,
+        })
+      );
 
       // Reset form and close modal
       setFormData({ ...initialState });
       handleToggle();
       Swal.fire({
-        title: formValue ? "Post Updated!" : "Post Created!",
+        title: "Post Created!",
         icon: "success",
       });
       e.target.reset();
@@ -129,15 +115,6 @@ const Form = ({ handleToggle, formValue }) => {
       });
     }
   };
-
-  useEffect(() => {
-    if (formValue) {
-      setFormData(formValue);
-    } else {
-      setFormData({ ...initialState });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formValue]);
   return (
     <>
       <div className="w-full max-w-md rounded-lg bg-zinc-900">
@@ -153,21 +130,12 @@ const Form = ({ handleToggle, formValue }) => {
             />
           </div>
           <div className="space-y-2 text-sm text-zinc-400">
-            <FileUpload
-              label={"Author Photo"}
-              name={"authorPhoto"}
-              setFile={setAvatar}
+            <input
+              type="file"
+              name="authorPhoto"
+              onChange={(e) => setAvatar(e.target.files[0])}
             />
           </div>
-          {formValue && formValue?.avatar && (
-            <div className="flex items-center justify-between">
-              <img
-                className="w-12 h-12 rounded object-cover"
-                src={formValue.avatar}
-                alt="Author"
-              />
-            </div>
-          )}
           <div className="space-y-2 text-sm  text-zinc-400">
             <Label label="Post Details" name="postDetails" />
             <textarea
@@ -180,21 +148,12 @@ const Form = ({ handleToggle, formValue }) => {
             />
           </div>
           <div className="space-y-2 text-sm text-zinc-400">
-            <FileUpload
-              label={"Post Image"}
-              name={"postImage"}
-              setFile={setPostImage}
+            <input
+              type="file"
+              name="postImage"
+              onChange={(e) => setPostImage(e.target.files[0])}
             />
           </div>
-          {formValue && formValue?.postImage && (
-            <div className="flex items-center justify-between">
-              <img
-                className="w-12 h-12 rounded object-cover"
-                src={formValue.postImage}
-                alt="Author"
-              />
-            </div>
-          )}
           <button
             disabled={loading}
             className="rounded-md px-4 py-2 w-full text-white transition-colors hover:bg-orange-600 bg-orange-700"
@@ -204,8 +163,6 @@ const Form = ({ handleToggle, formValue }) => {
                 Processing...
                 <Loader className="size-6 animate-spin text-white" />
               </span>
-            ) : formValue ? (
-              "Update"
             ) : (
               "Share"
             )}

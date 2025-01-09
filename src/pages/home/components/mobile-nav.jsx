@@ -3,8 +3,13 @@ import { X } from "lucide-react";
 
 import Logo from "../../../assets/icons/logo";
 import { menuItems } from "../constants/menu-item";
+import Button from "../../../components/ui/button";
+import { PlusSquare } from "lucide-react";
+import useToggler from "../../../hooks/useToggler";
+import Modal from "../../../components/shared/modal";
 
 const MobileNav = ({ open, setOpen }) => {
+  const { open: modalOpen, handleToggle } = useToggler();
   return (
     <>
       <div
@@ -16,13 +21,10 @@ const MobileNav = ({ open, setOpen }) => {
       >
         <div
           className="absolute inset-0 bg-black opacity-50"
-          onClick={() => setOpen(false)}
+          onClick={setOpen}
         ></div>
         <div className="absolute left-0 top-0 bottom-0 w-64 bg-black p-4 h-screen overflow-y-scroll">
-          <button
-            onClick={() => setOpen(false)}
-            className="absolute top-4 right-4"
-          >
+          <button onClick={setOpen} className="absolute top-4 right-4">
             <X className="w-6 h-6" />
           </button>
           <Logo className="mb-8" />
@@ -36,6 +38,11 @@ const MobileNav = ({ open, setOpen }) => {
                 <span>{item.label}</span>
               </button>
             ))}
+            <Button onClick={handleToggle}>
+              <PlusSquare className="w-6 h-6" />
+              <span className="ml-4">Create</span>
+            </Button>
+            <Modal open={modalOpen} handleToggle={handleToggle} />
           </nav>
         </div>
       </div>
